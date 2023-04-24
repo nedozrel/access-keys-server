@@ -9,6 +9,6 @@ Key.virtual('expired').get(function () { // Can't use arrow func because it has 
   return !!this.expiration && Date.now() >= this.expiration.getTime();
 });
 
-Key.set('toJSON', {virtuals: true})
+Key.set('toJSON', {virtuals: true});
 
 module.exports = mongoose.model('Key', Key);

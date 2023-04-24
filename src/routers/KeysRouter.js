@@ -32,22 +32,24 @@ keysRouter.post(
 
 keysRouter.put(
   '/keys/:id',
+  [
+    body('title')
+      .exists()
+      .withMessage('Title is required')
+      .isString()
+      .withMessage('Wrong title'),
+    body('expiration')
+      .exists()
+      .withMessage('Date is required')
+      .isDate()
+      .toDate()
+      .withMessage('Wrong date'),
+  ],
   keysController.updateKey,
 );
 
 keysRouter.delete(
   '/keys/:id',
-  [
-    body('title')
-      .optional()
-      .isString()
-      .withMessage('Wrong title'),
-    body('expiration')
-      .optional()
-      .isDate()
-      .toDate()
-      .withMessage('Wrong date'),
-  ],
   keysController.deleteKey,
 );
 

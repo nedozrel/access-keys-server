@@ -41,7 +41,16 @@ class KeysController {
 
   async updateKey(req, res) {
     try {
-      return res.json({});
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(HTTP_STATUSES.BAD_REQUEST).json({
+          errors: errors.array(),
+        });
+      }
+      const {title, expiration} = req.body;
+      const {id} = req.params;
+      const key = await keysService.updateKey(id, title, expiration);
+      return res.json(key);
     } catch (e) {
       return res.status(HTTP_STATUSES.INTERNAL_SERVER_ERROR).json(e);
     }

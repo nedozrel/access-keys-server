@@ -23,6 +23,13 @@ class KeysService {
     });
   }
 
+  async updateKey(id, title, expiration) {
+    return keyModel.findByIdAndUpdate(id, {
+      title: title,
+      expiration: expiration,
+    });
+  }
+
   async deleteKey(id) {
     return keyModel.findByIdAndDelete(id);
   }

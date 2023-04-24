@@ -8,6 +8,7 @@ class KeysController {
       const keys = await keysService.getKeys();
       return res.json(keys);
     } catch (e) {
+      console.error(e);
       return res.status(HTTP_STATUSES.INTERNAL_SERVER_ERROR).json(e);
     }
   }

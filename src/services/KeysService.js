@@ -9,7 +9,7 @@ class KeysService {
     return keyModel.findById(id);
   }
 
-  async createKey(title, expiration) {
+  async createKey(title, expiration, expiresInHours) {
     if (!expiration) {
       const currentTime = new Date().getTime();
       const oneDayMs = 24 * 60 * 60 * 1000;
@@ -17,6 +17,14 @@ class KeysService {
       expiration = new Date(expirationTime);
     }
 
+    if (expiresInHours) {
+      const currentTime = new Date().getTime();
+      const expiresInMs = expiresInHours * 60 * 60 * 1000;
+      const expirationTime = currentTime + expiresInMs;
+      expiration = new Date(expirationTime);
+    }
+
+    console.log(new Date());
     return keyModel.create({
       title: title,
       expiration: expiration,

@@ -31,8 +31,8 @@ class KeysController {
           errors: errors.array(),
         });
       }
-      const {title, expiration} = req.body;
-      const key = await keysService.createKey(title, expiration);
+      const {title, expiration, expiresInHours} = req.body;
+      const key = await keysService.createKey(title, expiration, expiresInHours);
       return res.json(key);
     } catch (e) {
       return res.status(HTTP_STATUSES.INTERNAL_SERVER_ERROR).json(e);

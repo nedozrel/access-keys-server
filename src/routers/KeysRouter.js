@@ -23,9 +23,14 @@ keysRouter.post(
       .withMessage('Wrong title'),
     body('expiration')
       .optional()
-      .isDate()
+      .isISO8601()
       .toDate()
-      .withMessage('Wrong date'),
+      .withMessage('Date should be ISO8601 format'),
+    body('expiresInHours')
+      .optional()
+      .isInt()
+      .toInt()
+      .withMessage('Expiration time in hours should be an integer'),
   ],
   keysController.createKey,
 );
@@ -41,9 +46,9 @@ keysRouter.put(
     body('expiration')
       .exists()
       .withMessage('Date is required')
-      .isDate()
+      .isISO8601()
       .toDate()
-      .withMessage('Wrong date'),
+      .withMessage('Date should be ISO8601 format'),
   ],
   keysController.updateKey,
 );

@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const keyRouter = require('./routers/KeysRouter');
+const corsMiddleware = require('./middleware/cors.middleware');
 require('dotenv').config();
 
 const APP_PORT = process.env.APP_PORT || 80;
@@ -11,8 +12,9 @@ const CONNECTION_OPTIONS = {
   useUnifiedTopology: true,
 };
 
-
 app = express();
+
+app.use(corsMiddleware);
 app.use(express.json());
 app.use('/api', keyRouter);
 

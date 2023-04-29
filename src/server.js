@@ -17,12 +17,11 @@ const CONNECTION_OPTIONS = {
 
 app = express();
 
-app.use(corsMiddleware);
-app.use(express.json());
-app.use(express.static(appRoot));
-app.use(express.static(path.resolve(appRoot, 'access-keys-react-client/build')));
 app.use('/', indexRouter);
 app.use('/api', keyRouter);
+app.use(corsMiddleware);
+app.use(express.json());
+app.use(express.static(path.resolve(appRoot, 'access-keys-react-client/build')));
 
 const startApp = async () => {
   await mongoose.connect(DB_CONNECTION_STRING, CONNECTION_OPTIONS);

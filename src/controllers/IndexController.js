@@ -4,7 +4,6 @@ const HTTP_STATUSES = require('../utils/httpStatuses');
 class IndexController {
   async getKeys(req, res) {
     try {
-      console.log(__dirname);
       return res.sendFile(path.join(appRoot, 'access-keys-react-client/build', 'index.html'));
     } catch (e) {
       console.error(e);

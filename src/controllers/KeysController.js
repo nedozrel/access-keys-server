@@ -19,6 +19,7 @@ class KeysController {
       const keys = await keysService.getKey(id);
       return res.json(keys);
     } catch (e) {
+      console.error(e);
       return res.status(HTTP_STATUSES.INTERNAL_SERVER_ERROR).json(e);
     }
   }
@@ -35,6 +36,7 @@ class KeysController {
       const key = await keysService.createKey(title, expiration, expiresInHours);
       return res.json(key);
     } catch (e) {
+      console.error(e);
       return res.status(HTTP_STATUSES.INTERNAL_SERVER_ERROR).json(e);
     }
   }
@@ -52,6 +54,7 @@ class KeysController {
       const key = await keysService.updateKey(id, title, expiration);
       return res.json(key);
     } catch (e) {
+      console.error(e);
       return res.status(HTTP_STATUSES.INTERNAL_SERVER_ERROR).json(e);
     }
   }
@@ -62,6 +65,7 @@ class KeysController {
       const key = keysService.deleteKey(id);
       return res.json({key});
     } catch (e) {
+      console.error(e);
       return res.status(500).json(e);
     }
   }
